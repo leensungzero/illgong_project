@@ -1,0 +1,4 @@
+-r production.txt
+
+django-debug-toolbar==2.0
+django-extensions==2.2.1
