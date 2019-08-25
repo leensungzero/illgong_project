@@ -29,4 +29,9 @@ class FriendRequest(TimestampedModel):
     )
 
     def __str__(self):
-        return "{} -> {}" .format(self.request_user, self.response_user)
+        return f'FriendRequest(ID {self.id}, at {self.created_datetime})'
+
+    class Meta:
+        db_table = 'friend_request'
+        verbose_name = '친구 요청 Status'
+        verbose_name_plural = '{} {}'.format(verbose_name, '목록')
