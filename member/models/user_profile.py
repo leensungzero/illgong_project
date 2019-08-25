@@ -16,9 +16,39 @@ class UserProfile(TimestampedModel):
         (ENGLISH, 'EN'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=30)
-    nickname = models.CharField(max_length=30, unique=True)
-    birth = models.DateField()
-    language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES, default="Korean")
-    friends = models.ManyToManyField(User, related_name='friends')
+    user = models.OneToOneField(
+        to=User,
+        on_delete=models.CASCADE,
+        verbose_name='유저',
+    )
+    username = models.CharField(
+        max_length=30,
+        verbose_name='이름'
+    )
+    nickname = models.CharField(
+        max_length=30,
+        unique=True,
+        verbose_name='닉네임'
+    )
+    birth = models.DateField(
+        verbose_name='생년월일'
+    )
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
+        default="Korean",
+        verbose_name='언어'
+    )
+    friends = models.ManyToManyField(
+        to=User,
+        related_name='friends',
+        verbose_name='친구목록',
+    )
+
+    def __str__(self):
+        return f'UserProfile(ID {self.id}, by {self.user}, at {self.created_datetime})'
+
+    class Meta:
+        db_table = 'userProfile'
+        verbose_name = '프로필'
+        verbose_name_plural = '{} {}'.format(verbose_name, '목록')
