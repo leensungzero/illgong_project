@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 import pymysql
 from django.core.exceptions import ImproperlyConfigured
@@ -155,7 +156,15 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/resources/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'resources')
+
 AUTH_USER_MODEL = 'member.User'
+
+FCM_API_KEY = get_env_variable('FCM_API_KEY')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -167,4 +176,12 @@ REST_FRAMEWORK = {
     ),
 }
 
-FCM_API_KEY = get_env_variable('FCM_API_KEY')
+JWT_AUTH = {
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_EXPIRATION_DELTA': timedelta(seconds=300),
+    # TODO: JWT_REFRESH 기능을 사용할지에 대한 여부가 확실하지 않으므로 사용 여부가 결정될 때까지는 주석 처리를 합니다.
+    # 'JWT_ALLOW_REFRESH': True,
+    # 'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+    # 'JWT_RESPONSE_PAYLOAD_HANDLER': '',
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+}
