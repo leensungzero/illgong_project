@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 
 urlpatterns = [
+    path('api/', include('scheduler.routes')),
     path('admin/', admin.site.urls),
 ]
 
