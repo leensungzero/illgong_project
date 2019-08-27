@@ -8,12 +8,12 @@ User = get_user_model()
 
 
 class UserProfile(TimestampedModel):
-    KOREAN = 'Korean'
-    ENGLISH = 'English'
+    KOREAN = 'KR'
+    ENGLISH = 'EN'
 
     LANGUAGE_CHOICES = (
-        (KOREAN, 'KR'),
-        (ENGLISH, 'EN'),
+        (KOREAN, 'Korean'),
+        (ENGLISH, 'English'),
     )
 
     user = models.OneToOneField(
