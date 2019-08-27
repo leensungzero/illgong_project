@@ -1,8 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
+
+from member.models.user_manager import UserManager
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
+    username = None
+    nickname = None
     email = models.EmailField(
         unique=True,
         verbose_name='이메일',
@@ -10,6 +14,8 @@ class User(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    objects = UserManager()
 
     def __str__(self):
         return f'User(ID {self.id})'
