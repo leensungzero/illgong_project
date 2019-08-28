@@ -36,7 +36,7 @@ class UserProfile(TimestampedModel):
     language = models.CharField(
         max_length=2,
         choices=LANGUAGE_CHOICES,
-        default="Korean",
+        default="KR",
         verbose_name='언어'
     )
     friends = models.ManyToManyField(
