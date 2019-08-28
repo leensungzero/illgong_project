@@ -8,4 +8,5 @@ from member.routes import user_router
 
 urlpatterns = [
     path('user/', include(user_router.urls)),
+    path('user/', include('member.urls')),
 ]
