@@ -164,8 +164,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'resources')
 
 AUTH_USER_MODEL = 'member.User'
 
-FCM_API_KEY = get_env_variable('FCM_API_KEY')
-
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
