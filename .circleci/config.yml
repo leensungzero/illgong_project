@@ -4,14 +4,6 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.8-jessie
-        environment:
-          SECRET_KEY: $SECRET_KEY
-          DEFAULT_DB_ENGINE: $DEFAULT_DB_ENGINE
-          DEFAULT_DB_USER: $DEFAULT_DB_USER
-          DEFAULT_DB_HOST: $DEFAULT_DB_HOST
-          DEFAULT_DB_NAME: $DEFAULT_DB_NAME
-          DEFAULT_DB_PASSWORD: $DEFAULT_DB_PASSWORD
-          DEFAULT_DB_PORT: $DEFAULT_DB_PORT
     working_directory: ~/circleci-illgong-workflows
     steps:
       - run:
@@ -52,13 +44,13 @@ jobs:
           name: Docker build
           command: >
             docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
-            --env DEFAULT_DB_ENGINE="${DEFAULT_DB_ENGINE}"
-            --env DEFAULT_DB_HOST="${DEFAULT_DB_HOST}"
-            --env DEFAULT_DB_NAME="${DEFAULT_DB_NAME}"
-            --env DEFAULT_DB_PASSWORD="${DEFAULT_DB_PASSWORD}"
-            --env DEFAULT_DB_PORT="${DEFAULT_DB_PORT}"
-            --env DEFAULT_DB_USER="${DEFAULT_DB_USER}"
-            --env SECRET_KEY="${SECRET_KEY}" .
+            --build-arg DEFAULT_DB_ENGINE="${DEFAULT_DB_ENGINE}"
+            --build-arg DEFAULT_DB_HOST="${DEFAULT_DB_HOST}"
+            --build-arg DEFAULT_DB_NAME="${DEFAULT_DB_NAME}"
+            --build-arg DEFAULT_DB_PASSWORD="${DEFAULT_DB_PASSWORD}"
+            --build-arg DEFAULT_DB_PORT="${DEFAULT_DB_PORT}"
+            --build-arg DEFAULT_DB_USER="${DEFAULT_DB_USER}"
+            --build-arg SECRET_KEY="${SECRET_KEY}" .
 
 workflows:
   version: 2
