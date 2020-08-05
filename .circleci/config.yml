@@ -3,7 +3,7 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.8
+      - image: circleci/python:3.6.8-jessie
     working_directory: ~/circleci-illgong-workflows
     steps:
       - checkout
