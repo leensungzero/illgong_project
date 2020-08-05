@@ -4,6 +4,14 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.8-jessie
+        environment:
+          SECRET_KEY: $SECRET_KEY
+          DEFAULT_DB_ENGINE: $DEFAULT_DB_ENGINE
+          DEFAULT_DB_USER: $DEFAULT_DB_USER
+          DEFAULT_DB_HOST: $DEFAULT_DB_HOST
+          DEFAULT_DB_NAME: $DEFAULT_DB_NAME
+          DEFAULT_DB_PASSWORD: $DEFAULT_DB_PASSWORD
+          DEFAULT_DB_PORT: $DEFAULT_DB_PORT
     working_directory: ~/circleci-illgong-workflows
     steps:
       - checkout
