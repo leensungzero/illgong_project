@@ -10,7 +10,7 @@ WORKDIR /opt/services/illgong/src
 COPY requirements.txt /opt/services/illgong/src
 RUN pip install -r requirements.txt
 
-COPY . /opt/services/ttsapi/src
+COPY . /opt/services/illgong/src
 
 RUN python3 manage.py collectstatic
 
