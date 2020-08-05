@@ -42,14 +42,14 @@ jobs:
       - run:
           name: Docker build image
           command: |
-            docker build -t leensungzero/docker-test:"{CIRCLE_BRANCH}"-"${CIRCLE_BUILD_NUM}" .
+            docker build -t leensungzero/docker-test:"${CIRCLE_BRANCH}"-"${CIRCLE_BUILD_NUM}" .
 
       # Push docker image to dockerhub
       - run:
           name: Push image to dockerhub
           command: |
             docker login -u="$DOCKER_ID" -p="$DOCKER_PWD"
-            docker push leensungzero/docker-test:"{CIRCLE_BRANCH}"-"${CIRCLE_BUILD_NUM}"
+            docker push leensungzero/docker-test:"${CIRCLE_BRANCH}"-"${CIRCLE_BUILD_NUM}"
 
       # Setting ssh configuration
       - run:
