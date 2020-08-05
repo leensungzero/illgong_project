@@ -3,10 +3,12 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.8-jessie
+      - image: circleci/python:3.6.8
     working_directory: ~/circleci-illgong-workflows
     steps:
       - checkout
+      - setup_remote_docker
+        # docker_layer_caching: true
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/development.txt" }}
       - run:
@@ -28,9 +30,10 @@ jobs:
           destination: tr1
       - store_test_results:
           path: test-reports/
-       - setup_remote_docker
-          # docker_layer_caching: true
-      - run: docker build -t leensungzero/docker-test:$CIRCLE_BUILD_NUM .
+      - run:
+          name: Docker build
+          command: |
+            docker build -t leensungzero/docker-test:$CIRCLE_BUILD_NUM .
 
 workflows:
   version: 2
