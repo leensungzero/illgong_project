@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Docker build
           command: |
-            docker build -t leensungzero/docker-test:{$CIRCLE_BUILD_NUM}"
+            docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
             -e DEFAULT_DB_ENGINE="${DEFAULT_DB_ENGINE}"
             -e DEFAULT_DB_HOST="${DEFAULT_DB_HOST}"
             -e DEFAULT_DB_NAME="${DEFAULT_DB_NAME}"
