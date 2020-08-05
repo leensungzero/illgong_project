@@ -48,7 +48,7 @@ jobs:
             - "f7:61:a1:9d:21:3e:f5:c6:a1:37:4c:fe:5d:b2:64:ad"
       - run:
           name: Deploy master
-          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh ubuntu@15.165.160.215 'cd && bash deploy.sh'; else echo "Skipped"; fi
+          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh ubuntu@15.165.160.215 'cd /home/ubuntu/ && bash deploy.sh'; else echo "Skipped"; fi
 
 workflows:
   version: 2
