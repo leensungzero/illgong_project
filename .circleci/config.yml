@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Fix ssh Cound not resolve hostname
           command: |
-            ssh-keyscan 15.165.160.215 >> ~/.ssh/known_hosts
+            ssh-keyscan 15.164.229.146 >> ~/.ssh/known_hosts
       - add_ssh_keys:
           fingerprints:
             - "f7:61:a1:9d:21:3e:f5:c6:a1:37:4c:fe:5d:b2:64:ad"
