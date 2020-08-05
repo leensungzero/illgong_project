@@ -8,7 +8,7 @@ RUN mkdir -p /opt/services/illgong/src
 WORKDIR /opt/services/illgong/src
 
 COPY requirements/development.txt /opt/services/illgong/src
-RUN pip install -r requirements/development.txt
+RUN pip install -r ./requirements/development.txt
 
 COPY . /opt/services/ttsapi/src
 
