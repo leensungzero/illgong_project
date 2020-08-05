@@ -6,16 +6,6 @@ jobs:
       - image: circleci/python:3.6.8-jessie
     working_directory: ~/circleci-illgong-workflows
     steps:
-      - run:
-          name: Print environment variables
-          command: |
-            echo $SECRET_KEY
-            echo $DEFAULT_DB_ENGINE
-            echo $DEFAULT_DB_USER
-            echo $DEFAULT_DB_HOST
-            echo $DEFAULT_DB_NAME
-            echo $DEFAULT_DB_PASSWORD
-            echo $DEFAULT_DB_PORT
       - checkout
       - setup_remote_docker
         # docker_layer_caching: true
@@ -43,14 +33,7 @@ jobs:
       - run:
           name: Docker build
           command: >
-            docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
-            --build-arg DEFAULT_DB_ENGINE="${DEFAULT_DB_ENGINE}"
-            --build-arg DEFAULT_DB_HOST="${DEFAULT_DB_HOST}"
-            --build-arg DEFAULT_DB_NAME="${DEFAULT_DB_NAME}"
-            --build-arg DEFAULT_DB_PASSWORD="${DEFAULT_DB_PASSWORD}"
-            --build-arg DEFAULT_DB_PORT="${DEFAULT_DB_PORT}"
-            --build-arg DEFAULT_DB_USER="${DEFAULT_DB_USER}"
-            --build-arg SECRET_KEY="${SECRET_KEY}" .
+            docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}" .
 
 workflows:
   version: 2

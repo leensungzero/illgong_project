@@ -12,8 +12,6 @@ RUN pip install -r requirements.txt
 
 COPY . /opt/services/illgong/src
 
-RUN python3 manage.py collectstatic
-
 EXPOSE 8000
 
 CMD ["gunicorn", "--bind", ":8000", "scheduler.wsgi:application", "--timeout", "1000"]
