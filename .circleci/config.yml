@@ -32,8 +32,12 @@ jobs:
           path: test-reports/
       - run:
           name: Docker build
-          command: >
+          command: |
             docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}" .
+      - run:
+          name: Push image to dockerhub
+          command: |
+            docker push leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
 
 workflows:
   version: 2
