@@ -14,6 +14,16 @@ jobs:
           DEFAULT_DB_PORT: $DEFAULT_DB_PORT
     working_directory: ~/circleci-illgong-workflows
     steps:
+      - run:
+          name: Print environment variables
+          command: |
+            echo $SECRET_KEY
+            echo $DEFAULT_DB_ENGINE
+            echo $DEFAULT_DB_USER
+            echo $DEFAULT_DB_HOST
+            echo $DEFAULT_DB_NAME
+            echo $DEFAULT_DB_PASSWORD
+            echo $DEFAULT_DB_PORT
       - checkout
       - setup_remote_docker
         # docker_layer_caching: true
