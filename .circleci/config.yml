@@ -37,6 +37,7 @@ jobs:
       - run:
           name: Push image to dockerhub
           command: |
+            docker login -u="$DOCKER_ID" -p="$DOCKER_PWD"
             docker push leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
 
 workflows:
