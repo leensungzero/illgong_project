@@ -9,19 +9,26 @@ jobs:
       - checkout
       - setup_remote_docker
         # docker_layer_caching: true
+
+      # Trying resgtore_cache data about requirements file
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/development.txt" }}
+      # Install deps
       - run:
           name: Install python deps in a venv
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements/development.txt
+      # Save cache data
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements/development.txt" }}
           paths:
             - "venv"
+
+      # Run testing
       - run:
+          name: Run test code
           command: |
             . venv/bin/activate
             python manage.py test
@@ -30,15 +37,25 @@ jobs:
           destination: tr1
       - store_test_results:
           path: test-reports/
+
+      # Build logic
       - run:
-          name: Docker build
+          name: Master docker build
           command: |
-            docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}" .
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then docker build -t leensungzero/docker-test:prod-"${CIRCLE_BUILD_NUM}" .; else echo "Skipped"; fi
+      - run:
+          name: Develop docker build
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then docker build -t leensungzero/docker-test:dev-"${CIRCLE_BUILD_NUM}" .; else echo "Skipped"; fi
+
+      # Push docker image to dockerhub
       - run:
           name: Push image to dockerhub
           command: |
             docker login -u="$DOCKER_ID" -p="$DOCKER_PWD"
             docker push leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
+
+      # Setting ssh configuration
       - run:
           name: Fix ssh Cound not resolve hostname
           command: |
@@ -46,6 +63,8 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "f7:61:a1:9d:21:3e:f5:c6:a1:37:4c:fe:5d:b2:64:ad"
+
+      # Deploy prod or dev project
       - run:
           name: Deploy master
           command: if [ "${CIRCLE_BRANCH}" == "master" ]; then ssh ubuntu@15.164.229.146 'cd /home/ubuntu/ && bash deploy.sh'; else echo "Skipped"; fi
