@@ -50,14 +50,14 @@ jobs:
           path: test-reports/
       - run:
           name: Docker build
-          command: |
-            docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}" \
-            -e DEFAULT_DB_ENGINE="${DEFAULT_DB_ENGINE}" \
-            -e DEFAULT_DB_HOST="${DEFAULT_DB_HOST}" \
-            -e DEFAULT_DB_NAME="${DEFAULT_DB_NAME}" \
-            -e DEFAULT_DB_PASSWORD="${DEFAULT_DB_PASSWORD}" \
-            -e DEFAULT_DB_PORT="${DEFAULT_DB_PORT}" \
-            -e DEFAULT_DB_USER="${DEFAULT_DB_USER}" \
+          command: >
+            docker build -t leensungzero/docker-test:"${CIRCLE_BUILD_NUM}"
+            -e DEFAULT_DB_ENGINE="${DEFAULT_DB_ENGINE}"
+            -e DEFAULT_DB_HOST="${DEFAULT_DB_HOST}"
+            -e DEFAULT_DB_NAME="${DEFAULT_DB_NAME}"
+            -e DEFAULT_DB_PASSWORD="${DEFAULT_DB_PASSWORD}"
+            -e DEFAULT_DB_PORT="${DEFAULT_DB_PORT}"
+            -e DEFAULT_DB_USER="${DEFAULT_DB_USER}"
             -e SECRET_KEY="${SECRET_KEY}" .
 
 workflows:
